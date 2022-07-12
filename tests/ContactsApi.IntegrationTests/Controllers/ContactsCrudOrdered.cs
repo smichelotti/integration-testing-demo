@@ -1,6 +1,4 @@
-﻿using Baseline.ImTools;
-using ContactsApi.Controllers;
-using System.Net;
+﻿using ContactsApi.Controllers;
 
 namespace ContactsApi.IntegrationTests.Controllers;
 

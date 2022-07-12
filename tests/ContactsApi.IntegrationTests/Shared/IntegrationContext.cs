@@ -14,7 +14,6 @@ public abstract class IntegrationContext
 [CollectionDefinition(Fixtures.ScenariosFixture)]
 public class ScenarioCollection : ICollectionFixture<WebApiFixture>
 {
-
 }
 
 internal static class Fixtures
