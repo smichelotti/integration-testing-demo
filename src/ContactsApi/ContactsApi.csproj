@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.28.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.3.1" />
+	<InternalsVisibleTo Include="ContactsApi.IntegrationTests" />
   </ItemGroup>
 
 </Project>

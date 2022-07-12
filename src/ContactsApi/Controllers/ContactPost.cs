@@ -16,6 +16,6 @@ public class ContactPostController : BaseApiController
     public async Task<IActionResult> Post(ContactPostCommand command)
     {
         var result = await this.Mediator.Send(command).ConfigureAwait(false);
-        return this.OkOrNotFound(result);
+        return this.Created($"/api/contacts/{result.Id}", result);
     }
 }

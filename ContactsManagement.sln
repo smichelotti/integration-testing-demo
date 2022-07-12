@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApi", "src\ContactsApi\ContactsApi.csproj", "{0094E9E9-D3F0-4BD5-8F59-8A71C6C68900}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactsApi", "src\ContactsApi\ContactsApi.csproj", "{0094E9E9-D3F0-4BD5-8F59-8A71C6C68900}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D27C2D99-670C-42EB-9C9C-B8EC73CCDFD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactsApi.IntegrationTests", "tests\ContactsApi.IntegrationTests\ContactsApi.IntegrationTests.csproj", "{9247EC36-55CE-4BF4-B167-E9FA053EDF33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{0094E9E9-D3F0-4BD5-8F59-8A71C6C68900}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0094E9E9-D3F0-4BD5-8F59-8A71C6C68900}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0094E9E9-D3F0-4BD5-8F59-8A71C6C68900}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9247EC36-55CE-4BF4-B167-E9FA053EDF33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9247EC36-55CE-4BF4-B167-E9FA053EDF33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9247EC36-55CE-4BF4-B167-E9FA053EDF33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9247EC36-55CE-4BF4-B167-E9FA053EDF33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9247EC36-55CE-4BF4-B167-E9FA053EDF33} = {D27C2D99-670C-42EB-9C9C-B8EC73CCDFD7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5104A17C-FDE0-4552-B9D2-C9DB82936870}
