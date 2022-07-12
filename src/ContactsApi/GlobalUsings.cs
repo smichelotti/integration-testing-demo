@@ -1,0 +1,10 @@
+﻿global using AutoMapper;
+global using ContactsApi.Infrastructure;
+global using ContactsApi.Models;
+global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
+global using Swashbuckle.AspNetCore.Annotations;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations;
+global using System.Linq;
+global using System.Net;
