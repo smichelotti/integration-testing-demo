@@ -34,6 +34,8 @@ public class ContactsCrudOrdered : IntegrationContext
         resp.FirstName.Should().Be("John");
         resp.LastName.Should().Be("Smith");
         resp.Address.Street.Should().Be("501 E Pratt St");
+        resp.Address.Latitude.Should().NotBe(0);
+        resp.Address.Longitude.Should().NotBe(0);
     }
 
     [Fact]
@@ -52,6 +54,8 @@ public class ContactsCrudOrdered : IntegrationContext
         resp.FirstName.Should().Be("John");
         resp.LastName.Should().Be("Smith");
         resp.Address.Street.Should().Be("501 E Pratt St");
+        resp.Address.Latitude.Should().NotBe(0);
+        resp.Address.Longitude.Should().NotBe(0);
     }
 
     [Fact]
@@ -78,6 +82,8 @@ public class ContactsCrudOrdered : IntegrationContext
         resp.FirstName.Should().Be("Johnx");
         resp.LastName.Should().Be("Smithx");
         resp.Address.Street.Should().Be("123 Main Street");
+        resp.Address.Latitude.Should().NotBe(0);
+        resp.Address.Longitude.Should().NotBe(0);
 
         // Let's make absolutely sure a GET request has updated data and the PUT didn't just echo it back on the response
         var getResult = await this.Host.Scenario(_ =>

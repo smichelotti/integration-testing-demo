@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using GoogleMaps.LocationServices;
 using Microsoft.Azure.Cosmos;
 
 namespace ContactsApi.Infrastructure;
@@ -14,6 +14,8 @@ public static class ConfigExtensions
         services.AddHttpClient();
         services.AddSingleton(p => p.GetService<ApiServiceFactory>().CreateAndInitializeCosmosClientAsync());
         services.AddScoped<CosmosContext>();
+        services.AddTransient<GoogleLocationService>(x => new GoogleLocationService(config["MapsApiKey"]));
+        services.AddTransient<IGeoLocationService, GeoLocationService>();
         //services.AddSingleton(p => ServiceFactory.CreateConfig(p.GetService<IConfiguration>()));
     }
 
@@ -42,7 +44,6 @@ public static class ConfigExtensions
             };
 
             return CosmosClient.CreateAndInitializeAsync(this.config.GetConnectionString("cosmos-conn"), containers, clientOptions).GetAwaiter().GetResult();
-
         }
     }
 }

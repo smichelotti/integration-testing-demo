@@ -1,6 +1,7 @@
 ﻿global using AutoMapper;
 global using ContactsApi.Infrastructure;
 global using ContactsApi.Models;
+global using ContactsApi.Services;
 global using MediatR;
 global using Microsoft.AspNetCore.Mvc;
 global using Swashbuckle.AspNetCore.Annotations;
