@@ -1,4 +1,5 @@
 ﻿using ContactsApi.Controllers;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace ContactsApi.IntegrationTests.Controllers;
 
@@ -34,8 +35,8 @@ public class ContactsCrudOrdered : IntegrationContext
         resp.FirstName.Should().Be("John");
         resp.LastName.Should().Be("Smith");
         resp.Address.Street.Should().Be("501 E Pratt St");
-        resp.Address.Latitude.Should().NotBe(0);
-        resp.Address.Longitude.Should().NotBe(0);
+        resp.Address.Latitude.Should().BeGreaterThan(39);
+        resp.Address.Longitude.Should().BeLessThan(-76);
     }
 
     [Fact]
@@ -54,12 +55,27 @@ public class ContactsCrudOrdered : IntegrationContext
         resp.FirstName.Should().Be("John");
         resp.LastName.Should().Be("Smith");
         resp.Address.Street.Should().Be("501 E Pratt St");
-        resp.Address.Latitude.Should().NotBe(0);
-        resp.Address.Longitude.Should().NotBe(0);
+        resp.Address.Latitude.Should().BeGreaterThan(39);
+        resp.Address.Longitude.Should().BeLessThan(-76);
     }
 
     [Fact]
-    public async Task T03_should_update_existing_contact()
+    public async Task T03_should_retrieve_contacts_list()
+    {
+        var result = await this.Host.Scenario(_ =>
+        {
+            _.Get.Url($"/api/contacts");
+            _.StatusCodeShouldBeOk();
+        });
+
+        // assert
+        var resp = result.ReadAsJson<List<ContactsGetResult>>();
+        resp.Count.Should().BeGreaterThan(0);
+        resp.Should().Contain(x => x.FirstName == "John");
+    }
+
+    [Fact]
+    public async Task T04_should_update_existing_contact()
     {
         // arrange/act
         var existing = await this.Host.GetAsJson<ContactGetResult>($"/api/contacts/{contactId}");
@@ -82,8 +98,8 @@ public class ContactsCrudOrdered : IntegrationContext
         resp.FirstName.Should().Be("Johnx");
         resp.LastName.Should().Be("Smithx");
         resp.Address.Street.Should().Be("123 Main Street");
-        resp.Address.Latitude.Should().NotBe(0);
-        resp.Address.Longitude.Should().NotBe(0);
+        resp.Address.Latitude.Should().BeGreaterThan(39);
+        resp.Address.Longitude.Should().BeLessThan(-76);
 
         // Let's make absolutely sure a GET request has updated data and the PUT didn't just echo it back on the response
         var getResult = await this.Host.Scenario(_ =>
@@ -98,10 +114,12 @@ public class ContactsCrudOrdered : IntegrationContext
         getResp.FirstName.Should().Be("Johnx");
         getResp.LastName.Should().Be("Smithx");
         getResp.Address.Street.Should().Be("123 Main Street");
+        resp.Address.Latitude.Should().BeGreaterThan(39);
+        resp.Address.Longitude.Should().BeLessThan(-76);
     }
 
     [Fact]
-    public async Task T04_should_delete_existing_contact()
+    public async Task T05_should_delete_existing_contact()
     {
         // act/assert
         await this.Host.Scenario(_ =>
