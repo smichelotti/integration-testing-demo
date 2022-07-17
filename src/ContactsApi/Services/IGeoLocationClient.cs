@@ -1,6 +1,6 @@
 ﻿namespace ContactsApi.Services;
 
-public interface IGeoLocationService
+public interface IGeoLocationClient
 {
     GeoPoint GetLatLongFromAddress(GeoAddress address);
 }

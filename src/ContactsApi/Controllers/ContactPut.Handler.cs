@@ -3,10 +3,10 @@ namespace ContactsApi.Controllers;
 public class ContactPutHandler : IRequestHandler<ContactPutCommand, ContactPutResult>
 {
     private readonly CosmosContext db;
-    private readonly IGeoLocationService geoService;
+    private readonly IGeoLocationClient geoService;
     private readonly IMapper mapper;
 
-    public ContactPutHandler(CosmosContext db, IGeoLocationService geoService, IMapper mapper)
+    public ContactPutHandler(CosmosContext db, IGeoLocationClient geoService, IMapper mapper)
     {
         this.db = db;
         this.geoService = geoService;

@@ -1,5 +1,4 @@
-﻿using GoogleMaps.LocationServices;
-using Microsoft.Azure.Cosmos;
+﻿using Microsoft.Azure.Cosmos;
 
 namespace ContactsApi.Infrastructure;
 
@@ -14,9 +13,7 @@ public static class ConfigExtensions
         services.AddHttpClient();
         services.AddSingleton(p => p.GetService<ApiServiceFactory>().CreateAndInitializeCosmosClientAsync());
         services.AddScoped<CosmosContext>();
-        services.AddTransient<GoogleLocationService>(x => new GoogleLocationService(config["MapsApiKey"]));
-        services.AddTransient<IGeoLocationService, GeoLocationService>();
-        //services.AddSingleton(p => ServiceFactory.CreateConfig(p.GetService<IConfiguration>()));
+        services.AddTransient<IGeoLocationClient, GeoLocationClient>();
     }
 
     private class ApiServiceFactory

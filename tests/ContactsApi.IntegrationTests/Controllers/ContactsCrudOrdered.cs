@@ -1,5 +1,7 @@
 ﻿using ContactsApi.Controllers;
 using Microsoft.AspNetCore.ResponseCompression;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
 
 namespace ContactsApi.IntegrationTests.Controllers;
 
@@ -20,6 +22,8 @@ public class ContactsCrudOrdered : IntegrationContext
             LastName = "Smith",
             Address = new("501 E Pratt St", "Baltimore", "MD", "21202")
         };
+        this.GeoLocationStub.Given(Request.Create().WithPath("/maps/api/geocode/xml").UsingGet())
+            .RespondWith(Response.Create().WithStatusCode(HttpStatusCode.OK).WithBody(File.ReadAllText("Data/geo-location-resp.xml")));
 
         // act
         var result = await this.Host.Scenario(_ =>
