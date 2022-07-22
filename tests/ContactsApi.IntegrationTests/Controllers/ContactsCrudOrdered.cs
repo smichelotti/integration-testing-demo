@@ -1,4 +1,5 @@
 ﻿using ContactsApi.Controllers;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
@@ -13,7 +14,31 @@ public class ContactsCrudOrdered : IntegrationContext
     public ContactsCrudOrdered(WebApiFixture fixture) : base(fixture) { }
 
     [Fact]
-    public async Task T01_should_generate_new_contact()
+    public async Task T01_invalid_contact_should_return_400()
+    {
+        // arrange
+        var contact = new ContactPostCommand
+        {
+            Address = new(null, "Baltimore", "MD", "21202")
+        };
+
+        // act
+        var result = await this.Host.Scenario(_ =>
+        {
+            _.Post.Json(contact).ToUrl("/api/contacts");
+            _.StatusCodeShouldBe(HttpStatusCode.BadRequest);
+        });
+
+        // assert
+        var resp = result.ReadAsJson<ProblemDetailsExt>();
+        resp.Title.Should().Be("One or more validation errors occurred.");
+        resp.Errors["LastName"].First().Should().Be("Last Name is required.");
+        resp.Errors["FirstName"].First().Should().Be("First Name is required.");
+        resp.Errors["Address.Street"].First().Should().Be("The Street field is required.");
+    }
+
+    [Fact]
+    public async Task T02_should_generate_new_contact()
     {
         // arrange
         var contact = new ContactPostCommand
@@ -44,7 +69,7 @@ public class ContactsCrudOrdered : IntegrationContext
     }
 
     [Fact]
-    public async Task T02_should_retrieve_contact()
+    public async Task T03_should_retrieve_contact()
     {
         var result = await this.Host.Scenario(_ =>
         {
@@ -64,7 +89,7 @@ public class ContactsCrudOrdered : IntegrationContext
     }
 
     [Fact]
-    public async Task T03_should_retrieve_contacts_list()
+    public async Task T04_should_retrieve_contacts_list()
     {
         var result = await this.Host.Scenario(_ =>
         {
@@ -79,7 +104,7 @@ public class ContactsCrudOrdered : IntegrationContext
     }
 
     [Fact]
-    public async Task T04_should_update_existing_contact()
+    public async Task T05_should_update_existing_contact()
     {
         // arrange/act
         var existing = await this.Host.GetAsJson<ContactGetResult>($"/api/contacts/{contactId}");
@@ -123,7 +148,7 @@ public class ContactsCrudOrdered : IntegrationContext
     }
 
     [Fact]
-    public async Task T05_should_delete_existing_contact()
+    public async Task T06_should_delete_existing_contact()
     {
         // act/assert
         await this.Host.Scenario(_ =>
