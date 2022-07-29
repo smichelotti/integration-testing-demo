@@ -28,6 +28,12 @@ This repository highlights how we do Integration testing.
 ## Running the code
 
 * Obtain an Google Maps API Key from the [Google developer console](https://console.cloud.google.com/apis/dashboard)
+* Ensure [Cosmos DB Emulator](https://docs.microsoft.com/en-us/azure/cosmos-db/local-emulator?tabs=ssl-netstd21) is installed and running
+* In your local Cosmos DB Emulator:
+  * Create database named: `contacts-management`
+  * Create collection called: `entities`
+    * Unique ID of: `id` (the default)
+    * Partition key of: `/docType`
 * `cd src\ContactsApi`
 * `dotnet user-secrets set MapsApiKey <your-google-maps-api-key>`
 * `Ctrl-F5` to run from Visual Studio
