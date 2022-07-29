@@ -2,6 +2,7 @@
 using Moq;
 using WireMock.Server;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ContactsApi.IntegrationTests.Shared;
 
@@ -19,7 +20,7 @@ public class WebApiFixture : IAsyncLifetime
             builder.ConfigureServices((context, services) =>
             {
                 // Line below is used for mocking with Moq
-                //services.AddTransient<IGeoLocationService>(x => CreateMockGeoLocation());
+                //services.AddTransient<IGeoLocationClient>(x => CreateMockGeoLocation());
             });
             builder.ConfigureAppConfiguration((context, config) =>
             {
