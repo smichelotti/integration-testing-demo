@@ -8,7 +8,7 @@ public static class ConfigExtensions
     {
         services.AddSingleton<IConfiguration>(config);
         services.AddTransient<ApiServiceFactory>();
-        services.AddMediatR(typeof(Program));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Program>());
         services.AddAutoMapper(typeof(Program));
         services.AddHttpClient();
         services.AddSingleton(p => p.GetService<ApiServiceFactory>().CreateAndInitializeCosmosClientAsync());

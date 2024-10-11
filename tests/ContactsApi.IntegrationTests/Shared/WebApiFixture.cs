@@ -1,8 +1,7 @@
 ﻿using ContactsApi.Services;
+using Microsoft.Extensions.Configuration;
 using Moq;
 using WireMock.Server;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace ContactsApi.IntegrationTests.Shared;
 

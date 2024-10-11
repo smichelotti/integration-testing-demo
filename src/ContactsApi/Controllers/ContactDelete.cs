@@ -16,7 +16,7 @@ public class ContactDeleteController : BaseApiController
     [SwaggerResponse(404, "Contact Not Found.")]
     public async Task<IActionResult> Delete([FromRoute]ContactDeleteCommand command)
     {
-        var result = await this.Mediator.Send(command).ConfigureAwait(false);
+        await this.Mediator.Send(command).ConfigureAwait(false);
         return this.NoContent();
     }
 }

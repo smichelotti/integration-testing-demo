@@ -6,9 +6,8 @@ public class ContactDeleteHandler : IRequestHandler<ContactDeleteCommand>
 
     public ContactDeleteHandler(CosmosContext db) => this.db = db;
 
-    public async Task<Unit> Handle(ContactDeleteCommand command, CancellationToken cancellationToken)
+    public async Task Handle(ContactDeleteCommand command, CancellationToken cancellationToken)
     {
         await this.db.Contacts.DeleteItem<Contact>(command.Id, "Contact");
-        return default;
     }
 }
