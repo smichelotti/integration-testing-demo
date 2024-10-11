@@ -1,6 +1,4 @@
 ﻿using ContactsApi.Controllers;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.ResponseCompression;
 using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 
